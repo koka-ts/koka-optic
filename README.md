@@ -55,11 +55,11 @@ const result = Eff.runResult(updateName) // { user: { profile: { name: 'New Name
 ## Installation
 
 ```bash
-npm install koka-optic
+npm install koka koka-optic
 # or
-yarn add koka-optic
+yarn add koka koka-optic
 # or
-pnpm add koka-optic
+pnpm add koka koka-optic
 ```
 
 ## Getting Started
@@ -75,6 +75,7 @@ An **Optic** is a bidirectional path into your data structure that lets you:
 All while preserving immutability and type safety.
 
 ```typescript
+import { Eff } from 'koka'
 import { Optic } from 'koka-optic'
 
 // Create root optic
