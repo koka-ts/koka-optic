@@ -28,7 +28,6 @@ var setOpticCache = function (object, optic, value) {
 }
 var Optic = /** @class */ (function () {
     function Optic(options) {
-        this.__type = 'KokaOptic'
         this.get = options.get
         this.set = options.set
     }
@@ -196,6 +195,36 @@ var Optic = /** @class */ (function () {
                 })
             },
         })
+    }
+    Optic.get = function (root, optic) {
+        return optic.get(root)
+    }
+    Optic.set = function (root, optic, stateOrUpdater) {
+        if (typeof stateOrUpdater === 'function') {
+            var updater_1 = stateOrUpdater
+            return optic.set(function (state) {
+                var newState
+                return tslib_1.__generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            newState = updater_1(state)
+                            if (!(0, koka_1.isGenerator)(newState)) return [3 /*break*/, 2]
+                            return [5 /*yield**/, tslib_1.__values(newState)]
+                        case 1:
+                            return [2 /*return*/, _a.sent()]
+                        case 2:
+                            return [2 /*return*/, newState]
+                    }
+                })
+            })(root)
+        } else {
+            var state_1 = stateOrUpdater
+            return optic.set(function () {
+                return tslib_1.__generator(this, function (_a) {
+                    return [2 /*return*/, state_1]
+                })
+            })(root)
+        }
     }
     Optic.prototype.toJSON = function () {
         return undefined

@@ -31,7 +31,12 @@ export declare class Optic<State, Root> {
         InferOpticRoot<T[keyof T]>
     >
     static optional<State, Root>(optic: Optic<State, Root>): Optic<State | undefined, Root>
-    __type: 'KokaOptic'
+    static get<State, Root>(root: Root, optic: Optic<State, Root>): Generator<OpticErr, State>
+    static set<State, Root>(
+        root: Root,
+        optic: Optic<State, Root>,
+        stateOrUpdater: State | ((state: State) => State) | Updater<State>,
+    ): Generator<OpticErr, Root>
     get: Getter<State, Root>
     set: Setter<State, Root>
     constructor(options: OpticOptions<State, Root>)
