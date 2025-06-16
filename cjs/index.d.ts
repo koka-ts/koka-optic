@@ -1,1 +1,1 @@
-export * from './koka-optic'
+export * from './koka-optic';
